@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/nimikentta"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        android:hint="Nimi"/>
+
+    <Button
+        android:id="@+id/suomi"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:text="Suomeksi"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nimikentta" />
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/english"
+        android:text="English"
+        app:layout_constraintTop_toBottomOf="@id/nimikentta"
+        app:layout_constraintLeft_toRightOf="@id/suomi"/>
+
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/sverige"
+        android:text="Sverige"
+        app:layout_constraintTop_toBottomOf="@id/suomi"/>
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/surprise"
+        android:text="Surprise"
+        app:layout_constraintTop_toBottomOf="@id/english"
+        app:layout_constraintLeft_toRightOf="@id/sverige"/>
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/displayNimi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/surprise"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
