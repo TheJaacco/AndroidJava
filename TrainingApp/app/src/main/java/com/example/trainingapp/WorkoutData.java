@@ -27,4 +27,10 @@ public class WorkoutData implements Serializable {
     public void setTime(int time) {
         this.time = time;
     }
+
+    @Override
+    public String toString(){
+        //return this.workoutName + " " +Integer.toString(this.time) + " seconds ";
+        return workoutName + " " + time + " seconds ";
+    }
 }

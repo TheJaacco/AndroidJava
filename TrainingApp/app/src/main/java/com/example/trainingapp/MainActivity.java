@@ -28,12 +28,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         findViewById(R.id.addWorkoutBtn).setOnClickListener(this);
         findViewById(R.id.startWorkoutBtn).setOnClickListener(this);
+        ListView lista = (ListView) findViewById(R.id.listWorkout);
 
-        //fullWorkout.add(new WorkoutData("push ups", 30));
-        //adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fullWorkout);
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, fullWorkout);
 
-        //TextView myListView = findViewById(R.id.listWorkout);
-        //myListView.setAdapter(adapter);
+        lista.setAdapter(adapter);
+
 
 
 
@@ -47,11 +47,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if(v.getId() == R.id.startWorkoutBtn){
-            Intent runningIntent = new Intent (this, runningWorkout.class);
-            TextView seconds = (TextView) findViewById(R.id.listWorkout);
-            String message = seconds.getText().toString();
-            runningIntent.putExtra(EXTRA_MESSAGE, message);
-            startActivity(runningIntent);
+            Intent runningWorkout = new Intent(this, runningWorkout.class);
+            runningWorkout.putExtra(EXTRA_MESSAGE, fullWorkout);
+            startActivity(runningWorkout);
         }
     }
 
@@ -60,15 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         if(requestCode == SECOND_ACTIVITY_REQUEST_CODE){
             if(resultCode == RESULT_OK){
-
-                //WorkoutData newdata = (WorkoutData) data.getSerializableExtra("NEW_PART");
-                //fullWorkout.add(newdata);
-                //adapter.notifyDataSetChanged();
-
-
-                String returnString = data.getStringExtra(Intent.EXTRA_TEXT);
-                TextView listText = (TextView) findViewById(R.id.listWorkout);
-                listText.setText(returnString);
+                WorkoutData newData = (WorkoutData) data.getSerializableExtra("NEW_PART");
+                fullWorkout.add(newData);
+                adapter.notifyDataSetChanged();
 
             }
         }

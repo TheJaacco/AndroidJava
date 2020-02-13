@@ -2,6 +2,7 @@ package com.example.trainingapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,19 +22,14 @@ public class AddWorkout extends AppCompatActivity implements View.OnClickListene
 
     @Override
     public void onClick(View v) {
+        EditText secondsToPass = (EditText) findViewById(R.id.editSeconds);
+        EditText workoutToPass = (EditText) findViewById(R.id.writeWorkout);
+
         if(v.getId() == R.id.addButton){
-
-            EditText secondsToPass = (EditText) findViewById(R.id.editSeconds);
-            String stringToPassBack = secondsToPass.getText().toString();
-
-            EditText workoutToPass = (EditText) findViewById(R.id.writeWorkout);
-            String workoutToPassBack = workoutToPass.getText().toString();
-
-            String takaisinMeneva = ("" + stringToPassBack + " " + workoutToPassBack);
-
-            Intent intent = new Intent();
-            intent.putExtra(Intent.EXTRA_TEXT, takaisinMeneva);
-            setResult(RESULT_OK, intent);
+            WorkoutData newWorkout = new WorkoutData(workoutToPass.getText().toString(), Integer.parseInt(secondsToPass.getText().toString()));
+            Intent intentReturn = new Intent();
+            intentReturn.putExtra("NEW_PART", newWorkout);
+            setResult(Activity.RESULT_OK, intentReturn);
             finish();
 
         }

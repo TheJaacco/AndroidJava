@@ -7,26 +7,43 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.util.ArrayList;
+
 public class runningWorkout extends AppCompatActivity {
+
+    ArrayList<WorkoutData> sentWorkouts;
+    TextView workoutName = (TextView) findViewById(R.id.workoutTitle);
+    TextView timeLeft = (TextView) findViewById(R.id.timeTitle);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_running_workout);
 
-        Intent intent = getIntent();
-        final String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
-        int mesClock = Integer.parseInt(message);
+        sentWorkouts = (ArrayList<WorkoutData>) getIntent().getSerializableExtra(MainActivity.EXTRA_MESSAGE);
 
-        new CountDownTimer(mesClock*1000, 1000){
-            TextView clock = findViewById(R.id.timeTitle);
-            public void onTick(long millisUntilFinished){
-                clock.setText("Time remaining: " +millisUntilFinished / 1000);
+
+        workoutName.setText(sentWorkouts.get(0).getWorkoutName());
+        timeLeft.setText(Integer.toString(sentWorkouts.get(0).getTime()));
+
+        workOutTimer(sentWorkouts.get(0).getTime());
+    }
+        public void workOutTimer(int time)
+        {
+        new CountDownTimer(time*1000, 1000) {
+
+            @Override
+            public void onTick(long millisUntilFinished) {
+                long timer = millisUntilFinished/1000;
+                timeLeft.setText(Long.toString(timer));
 
             }
 
             @Override
             public void onFinish() {
+                workoutName.setText("DONE");
 
             }
         }.start();
